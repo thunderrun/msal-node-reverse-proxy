@@ -38,9 +38,9 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use('/GonvvamaReport', isAuthenticated, proxy('http://gsscha-rdp:8080', {
+app.use(process.env.PROXY_APP_PATH, isAuthenticated, proxy(process.env.PROXY_APP_ORIGIN, {
     proxyReqPathResolver: function (req) {
-        return '/GonvvamaReport' + req.url;
+        return process.env.PROXY_APP_PATH + req.url;
       }
 }));
 
