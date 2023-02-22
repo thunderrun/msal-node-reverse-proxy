@@ -12,7 +12,6 @@ var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const proxy = require('express-http-proxy');
-const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,12 +20,6 @@ const isAuthenticated = require('./middlewares/isAuthenticated');
 
 // initialize express
 var app = express();
-
-const corsOptions = {
-    origin: 'http://gsscha-rdp:8080',
-    credentials: true
-};
-app.use(cors(corsOptions));
 
 /**
  * Using express-session middleware for persistent user session. Be sure to
