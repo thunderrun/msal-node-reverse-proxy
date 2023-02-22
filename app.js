@@ -17,6 +17,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 const isAuthenticated = require('./middlewares/isAuthenticated');
+const hasRoles = require('./middlewares/hasRoles');
 
 // initialize express
 var app = express();
@@ -38,7 +39,7 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(process.env.PROXY_APP_PATH, isAuthenticated, proxy(process.env.PROXY_APP_ORIGIN, {
+app.use(process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
     proxyReqPathResolver: function (req) {
         return process.env.PROXY_APP_PATH + req.url;
       }
