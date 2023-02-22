@@ -6,18 +6,13 @@
 var express = require('express');
 var router = express.Router();
 
+const isAuthenticated = require('../middlewares/isAuthenticated');
 var fetch = require('../fetch');
 
 var { GRAPH_ME_ENDPOINT } = require('../authConfig');
 
 // custom middleware to check auth state
-function isAuthenticated(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // redirect to sign-in route
-    }
 
-    next();
-};
 
 router.get('/id',
     isAuthenticated, // check if user is authenticated

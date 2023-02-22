@@ -11,19 +11,28 @@ var session = require('express-session');
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const proxy = require('express-http-proxy');
+const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
+const isAuthenticated = require('./middlewares/isAuthenticated');
 
 // initialize express
 var app = express();
+
+const corsOptions = {
+    origin: 'http://gsscha-rdp:8080',
+    credentials: true
+};
+app.use(cors(corsOptions));
 
 /**
  * Using express-session middleware for persistent user session. Be sure to
  * familiarize yourself with available options. Visit: https://www.npmjs.com/package/express-session
  */
- app.use(session({
+app.use(session({
     secret: process.env.EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -35,6 +44,12 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+app.use('/GonvvamaReport', isAuthenticated, proxy('http://gsscha-rdp:8080', {
+    proxyReqPathResolver: function (req) {
+        return '/GonvvamaReport' + req.url;
+      }
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
