@@ -1,4 +1,4 @@
-FROM node:19
+FROM node:lts
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -15,5 +15,5 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 80
-CMD [ "node", "server.js" ]
+EXPOSE 3000
+CMD [ "npm", "start" ]
