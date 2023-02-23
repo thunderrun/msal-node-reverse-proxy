@@ -1,6 +1,6 @@
 const isAuthenticated = (req, res, next) => {
     if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // redirect to sign-in route
+        return res.redirect(`/auth/signin?originalUrl=${req.originalUrl}`); // redirect to sign-in route
     }
     next();
 };
