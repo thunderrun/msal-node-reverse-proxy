@@ -39,21 +39,16 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
-    proxyReqPathResolver: function (req) {
-        return process.env.PROXY_APP_PATH + req.url;
-      }
-}));
-
 app.use(logger('dev'));
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/auth', authRouter);
+app.use('/auth', express.json(), cookieParser(), express.urlencoded({ extended: false }), authRouter);
+app.use(process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
+    proxyReqPathResolver: function (req) {
+        const proxyPath = process.env.PROXY_APP_PATH === '/' ? '' : process.env.PROXY_APP_PATH;
+        return proxyPath + req.url;
+    }
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
