@@ -1,6 +1,0 @@
-// using RegExp to match URL
-
-module.exports = {
-    '/path': ['Admin'],
-    '/path\\?file=[^ ]*test.ext': ['Role1']
-}

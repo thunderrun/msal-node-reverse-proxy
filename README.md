@@ -5,16 +5,30 @@
 
 ## Configuration
 
-- `.env`
-- `pathRoleMapping.js`
-
 ```bash
 # windows
-copy .env.example .env 
-copy pathRoleSettings.js.example pathRoleSettings.js 
+copy .example.env .env 
+copy pathRoleSettings.example.js pathRoleSettings.js 
 # linux
-cp .env.example .env 
-cp pathRoleSettings.js.example pathRoleSettings.js 
+cp .example.env .env 
+cp pathRoleSettings.example.js pathRoleSettings.js 
+```
+
+### `.env`
+
+- Configure authentication and authorization parameters, see [Azure-Samples/ms-identity-node#running-the-sample](https://github.com/Azure-Samples/ms-identity-node#running-the-sample)
+- Configure App Path and Origin 
+- Enable/Disable Azure AD App Roles
+
+### `pathRoleMapping.js`
+
+```js
+// using RegExp to match URL
+
+module.exports = {
+    '/path-required-roles': ['Role1', 'Role2'],
+    '/path\\?file=[^ ]*test.ext': ['Role1'], // match query
+}
 ```
 
 ## Development
