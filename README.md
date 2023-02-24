@@ -5,26 +5,30 @@
 
 ## Configuration
 
-```bash
-copy .env.example .env # windows
-cp .env.example .env # linux
-```
-
 - `.env`
 - `pathRoleMapping.js`
+
+```bash
+# windows
+copy .env.example .env 
+copy pathRoleSettings.js.example pathRoleSettings.js 
+# linux
+cp .env.example .env 
+cp pathRoleSettings.js.example pathRoleSettings.js 
+```
 
 ## Development
 
 ```bash
 npm i
 npm run dev
-# then open http://localhost:3000
+# open http://localhost:3000
 ```
 
 ## Deployment
 
 ```bash
-npm start
+npm start # default port 3000
 # or using docker
-docker compose up
+docker compose up # default port 80
 ```
