@@ -29,6 +29,6 @@ npm run dev
 
 ```bash
 npm start # default port 3000
-# or using docker
+# or using docker compose
 docker compose up # default port 80
 ```
