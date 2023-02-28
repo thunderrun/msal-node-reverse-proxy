@@ -50,5 +50,17 @@ npm run dev
 ```bash
 npm start # default port 3000
 # or using docker compose
-docker compose up # default port 80
+docker compose up # port 80
+```
+
+NGINX configuration example
+
+```
+server {
+    ...
+
+    location / {
+        proxy_pass http://msal-node-reverse-proxy:3000/;
+    }
+}
 ```
