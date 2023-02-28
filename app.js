@@ -42,8 +42,8 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/auth', express.json(), cookieParser(), express.urlencoded({ extended: false }), authRouter);
-app.use(process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
+app.use(`${process.env.PROXY_PATH}/auth`, express.json(), cookieParser(), express.urlencoded({ extended: false }), authRouter);
+app.use(process.env.PROXY_PATH + process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
     proxyReqPathResolver: function (req) {
         const proxyPath = process.env.PROXY_APP_PATH === '/' ? '' : process.env.PROXY_APP_PATH;
         return proxyPath + req.url;

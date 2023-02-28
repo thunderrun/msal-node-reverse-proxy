@@ -21,7 +21,7 @@ cp pathRoleSettings.example.js pathRoleSettings.js
 ### `.env`
 
 - Configure authentication and authorization parameters, see [Azure-Samples/ms-identity-node#running-the-sample](https://github.com/Azure-Samples/ms-identity-node#running-the-sample)
-- Configure App Path and Origin 
+- Configure Proxy path, App path and origin 
 - Enable/Disable Azure AD App Roles
 
 ### `pathRoleMapping.js`
