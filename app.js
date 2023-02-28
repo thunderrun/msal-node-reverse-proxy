@@ -45,7 +45,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(`${process.env.PROXY_PATH}/auth`, express.json(), cookieParser(), express.urlencoded({ extended: false }), authRouter);
 app.use(process.env.PROXY_PATH + process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
     proxyReqPathResolver: function (req) {
-        const proxyPath = process.env.PROXY_APP_PATH === '/' ? '' : process.env.PROXY_APP_PATH;
+        let proxyPath = process.env.PROXY_APP_PATH;
+        if (process.env.INCLUDE_PROXY_PATH) {
+            proxyPath = process.env.PROXY_PATH + process.env.PROXY_APP_PATH;
+        }
         return proxyPath + req.url;
     }
 }));
