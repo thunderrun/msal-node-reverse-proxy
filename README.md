@@ -2,8 +2,6 @@
 
 - Authenticate your server paths with Azure Active Directory using Reverse Proxy
 - Modified from [Azure-Samples/ms-identity-node](https://github.com/Azure-Samples/ms-identity-node)
-- Why not using [Application Proxy](https://learn.microsoft.com/en-us/azure/active-directory/app-proxy/)?
-  - To use Application Proxy, you need a Windows server running Windows Server 2012 R2 or later
 
 ## Prerequisites
 
@@ -53,14 +51,14 @@ npm start # default port 3000
 docker compose up # port 80
 ```
 
-NGINX configuration example
+NGINX configuration example with Docker Compose
 
 ```
 server {
     ...
 
-    location / {
-        proxy_pass http://msal-node-reverse-proxy:3000/;
+    location /proxy {
+        proxy_pass http://msal-node-reverse-proxy:3000/; 
     }
 }
 ```
