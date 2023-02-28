@@ -46,7 +46,7 @@ app.use(`${process.env.PROXY_PATH}/auth`, express.json(), cookieParser(), expres
 app.use(process.env.PROXY_PATH + process.env.PROXY_APP_PATH, isAuthenticated, hasRoles, proxy(process.env.PROXY_APP_ORIGIN, {
     proxyReqPathResolver: function (req) {
         let proxyPath = process.env.PROXY_APP_PATH;
-        if (process.env.INCLUDE_PROXY_PATH) {
+        if (process.env.INCLUDE_PROXY_PATH === "1") {
             proxyPath = process.env.PROXY_PATH + process.env.PROXY_APP_PATH;
         }
         return proxyPath + req.url;
