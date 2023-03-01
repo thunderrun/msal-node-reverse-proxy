@@ -1,0 +1,9 @@
+{
+    "/path-required-roles": [
+        "Role1",
+        "Role2"
+    ],
+    "/path\\?file=[^ ]*test.ext": [
+        "Role1"
+    ]
+}

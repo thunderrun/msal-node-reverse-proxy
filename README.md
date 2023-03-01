@@ -15,23 +15,26 @@ copy .example.env .env
 copy pathRoleSettings.example.js pathRoleSettings.js 
 # linux
 cp .example.env .env 
-cp pathRoleSettings.example.js pathRoleSettings.js 
+cp pathRoleSettings.example.json pathRoleSettings.json 
 ```
 
 ### `.env`
+*Requires restart to take effect*
 
 - Configure authentication and authorization parameters, see [Azure-Samples/ms-identity-node#running-the-sample](https://github.com/Azure-Samples/ms-identity-node#running-the-sample)
 - Configure Proxy path, App path and origin 
 - Enable/Disable Azure AD App Roles
 
-### `pathRoleMapping.js`
+### `pathRoleMapping.json`
+*Effective immediately on file save*
 
-```js
-// using RegExp to match URL
+- Configure app path permissions with required roles
+- Use RegExp to match URL
 
-module.exports = {
-    '/path-required-roles': ['Role1', 'Role2'], // users with Role1 or Role2 will have access to path /path-required-roles
-    '/path\\?file=[^ ]*test.ext': ['Role1'], // match query
+```json
+{
+    "/path-required-roles": ["Role1", "Role2"], // users with Role1 or Role2 will have access to path /path-required-roles
+    "/path\\?file=[^ ]*test.ext": ["Role1"], // match query
 }
 ```
 
