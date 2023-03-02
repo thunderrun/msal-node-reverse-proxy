@@ -22,6 +22,7 @@
     "hbs": "^4.2.0",
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
+    "node-html-parser": "^6.1.5",
     "nodemon": "^2.0.20",
     "qs": "^6.11.0",
     "url-pattern": "^1.0.3"

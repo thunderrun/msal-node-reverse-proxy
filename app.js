@@ -18,7 +18,7 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 const isAuthenticated = require('./middlewares/isAuthenticated');
 const hasRoles = require('./middlewares/hasRoles');
-
+const hideElements = require('./middlewares/hideElements');
 // initialize express
 var app = express();
 
@@ -50,7 +50,8 @@ app.use(process.env.PROXY_PATH + process.env.PROXY_APP_PATH, isAuthenticated, ha
             proxyPath = process.env.PROXY_PATH + process.env.PROXY_APP_PATH;
         }
         return proxyPath + req.url;
-    }
+    },
+    userResDecorator: hideElements,
 }));
 
 // catch 404 and forward to error handler

@@ -30,11 +30,23 @@ cp pathRoleSettings.example.json pathRoleSettings.json
 
 - Configure app path permissions with required roles
 - Use RegExp to match URL
+- Use Query Selectors to hide page element 
 
-```json
+```jsonc
 {
-    "/path-required-roles": ["Role1", "Role2"], // users with Role1 or Role2 will have access to path /path-required-roles
-    "/path\\?file=[^ ]*test.ext": ["Role1"], // match query
+    "/path-required-roles": [ // users with Role1 or Role2 will have access to path /path-required-roles
+        "Role1",
+        "Role2"
+    ],
+    "/path\\?file=[^ ]*test.ext": [ // match query
+        "Role1"
+    ],
+    "/path-required-roles/subpath": {
+        "roles": ["Role1"],
+        "elements": {  // hide elements using query selectors, users with Role1 but without Role2 cannot see his element
+            "#container > div.btn-group.ud-toolbar.top-toolbar > button:nth-child(22)": ["Role2"]
+        }
+    }
 }
 ```
 
