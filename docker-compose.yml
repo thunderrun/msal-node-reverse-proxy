@@ -7,9 +7,10 @@ services:
       - "80:3000"
     volumes:
       - .:/usr/src/app
+      - /usr/src/app/node_modules
       # - type: bind
       #   source: ./.env
       #   target: /usr/src/app/.env
       # - type: bind
-      #   source: ./pathRoleSettings.js
-      #   target: /usr/src/app/pathRoleSettings.js
+      #   source: ./pathRoleSettings.json
+      #   target: /usr/src/app/pathRoleSettings.json
